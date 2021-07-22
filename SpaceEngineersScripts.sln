@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoHorizon", "AutoHorizon\AutoHorizon.csproj", "{F4EDDC2A-BF7D-4D5F-93A5-860EEBD45B7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PistonManipulator", "PistonManipulator\PistonManipulator.csproj", "{4F533301-819D-4A33-BBCB-0CEFFC240298}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PistonManipulatorDirectControl", "PistonManipulatorDirectControl\PistonManipulatorDirectControl.csproj", "{F3812E88-EE01-4E5C-A332-578293B06990}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAutoPilot", "CarAutoPilot\CarAutoPilot.csproj", "{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoverCraftControl", "HoverCraftControl\HoverCraftControl.csproj", "{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4EDDC2A-BF7D-4D5F-93A5-860EEBD45B7D}.Debug|x64.ActiveCfg = Debug|x64
+		{F4EDDC2A-BF7D-4D5F-93A5-860EEBD45B7D}.Debug|x64.Build.0 = Debug|x64
+		{4F533301-819D-4A33-BBCB-0CEFFC240298}.Debug|x64.ActiveCfg = Debug|x64
+		{4F533301-819D-4A33-BBCB-0CEFFC240298}.Debug|x64.Build.0 = Debug|x64
+		{F3812E88-EE01-4E5C-A332-578293B06990}.Debug|x64.ActiveCfg = Debug|x64
+		{F3812E88-EE01-4E5C-A332-578293B06990}.Debug|x64.Build.0 = Debug|x64
+		{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}.Debug|x64.ActiveCfg = Debug|x64
+		{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}.Debug|x64.Build.0 = Debug|x64
+		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.ActiveCfg = Debug|x64
+		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E54E090-023C-4AEB-A0DD-5C82D6A32B48}
+	EndGlobalSection
+EndGlobal
