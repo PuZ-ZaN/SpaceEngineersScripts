@@ -26,33 +26,68 @@ namespace IngameScript
 {
     partial class Program : MyGridProgram
     {
+        //==========Settings========
+        const string RemoteControlName = "RemoteControl";
+        const int MaxSpeed_0_100 = 50;
+        const bool WaitForFreeWay = true;
+        const bool IsServer = false;
+        //========EndSettings========
         IMyRemoteControl remoteControl;
+        bool stage = false;
         public Program()
         {
-            remoteControl = GridTerminalSystem.GetBlockWithName("RemoteControl") as IMyRemoteControl;
+            if (IsServer)
+                Echo = (a) => { };//optimization for server
 
-            remoteControl.WaitForFreeWay = true;
-            remoteControl.SpeedLimit = 10;
+            remoteControl = GridTerminalSystem.GetBlockWithName(RemoteControlName) as IMyRemoteControl;
+            remoteControl.WaitForFreeWay = WaitForFreeWay;
             remoteControl.FlightMode = FlightMode.OneWay;
+            remoteControl.SpeedLimit = MaxSpeed_0_100;
             remoteControl.SetCollisionAvoidance(true);
-
+            remoteControl.Direction = Base6Directions.Direction.Forward;
             Runtime.UpdateFrequency = UpdateFrequency.Update100;
         }
 
         public void Main(string argument, UpdateType updateSource)
         {
+            #region Ping
+            stage = !stage;
+            if (stage)
+                Echo("*");
+            else
+                Echo("'");
+            #endregion
             Vector3D nearestPlayerCrds;
             if (remoteControl.GetNearestPlayer(out nearestPlayerCrds))
             {
                 Vector3D thisPos = Me.CubeGrid.GetPosition();
                 var distanceToPlayer = (nearestPlayerCrds - thisPos).Length();
-                Echo("NearestPlayer Lenght: " + distanceToPlayer);
-                remoteControl.ClearWaypoints();
-                if (distanceToPlayer > 4)
+                var gravGrid = remoteControl.GetNaturalGravity();
+                var GoalCoords = nearestPlayerCrds;
+                if (gravGrid.Length() > 0)
+                {//PlanetBehavios
+                    Echo("PlanetBehavior");
+                    remoteControl.ClearWaypoints();
+                    GoalCoords = nearestPlayerCrds - gravGrid * 0.2f;
+                    remoteControl.SpeedLimit = (float)(distanceToPlayer > 25 ? 25 : distanceToPlayer);
+
+                    double elevation;
+                    if (remoteControl.TryGetPlanetElevation(MyPlanetElevation.Surface, out elevation)){
+                        Echo("elevation " + elevation);
+                        //написать поведение в зависимости от высоты
+                    }
+                }
+                if (distanceToPlayer < 15 && distanceToPlayer > 4)
+                    remoteControl.SetCollisionAvoidance(false);
+                else
+                    remoteControl.SetCollisionAvoidance(true);
+                if (distanceToPlayer > Me.CubeGrid.GridSize * 7 * (((int)Me.CubeGrid.GridSizeEnum) + 1))
                 {
-                    remoteControl.AddWaypoint(new MyWaypointInfo("PlayerCoords", nearestPlayerCrds));
+                    remoteControl.AddWaypoint(new MyWaypointInfo("PlayerCoords", GoalCoords));
                     remoteControl.SetAutoPilotEnabled(true);
                 }
+                Echo(String.Format("NearestPlayer in {0} meters", distanceToPlayer));
+                Echo(GoalCoords.ToString());
             }
             else
             {
@@ -60,36 +95,4 @@ namespace IngameScript
             }
         }
     }
-    /*public class Behavior
-    {
-        public Dictionary<Func<bool>, Action> behaviors = new Dictionary<Func<bool>, Action>();
-
-        public IMyCockpit Cockpit;
-
-        public Behavior(IMyCockpit cockpit)
-        {
-            Cockpit = cockpit;
-            FillUpBehaviors();
-        }
-
-        public void Exec()
-        {
-            foreach (var behavior in behaviors)
-                if (behavior.Key())
-                    behavior.Value();
-        }
-        public void Add(Func<bool> func, Action action)
-        {
-            behaviors.Add(func, action);
-        }
-        public bool Delete(Func<bool> func) =>
-            behaviors.Remove(func);
-
-        void FillUpBehaviors()
-        {
-            //в разработке
-            //Add(() => !Cockpit.IsUnderControl, () => Cockpit.DampenersOverride = true);
-            Add(new Func<bool>(() => !Cockpit.IsUnderControl), new Action(() => Cockpit.DampenersOverride = true));
-        }
-    }*/
 }
