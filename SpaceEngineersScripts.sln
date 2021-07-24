@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAutoPilot", "CarAutoPilo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoverCraftControl", "HoverCraftControl\HoverCraftControl.csproj", "{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPilotWithRaycastExperiments", "AutoPilotScriptGyroControl\AutoPilotWithRaycastExperiments.csproj", "{409BD3C2-2768-4C04-8EAE-7155EF23E89D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayCastTestScript", "RayCastTestScript\RayCastTestScript.csproj", "{4957333D-0753-445B-81F3-97FA80D4CC53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPilotWithRaycastExperiments", "AutoPilotWithRaycastExperiments\AutoPilotWithRaycastExperiments.csproj", "{409BD3C2-2768-4C04-8EAE-7155EF23E89D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +32,10 @@ Global
 		{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}.Debug|x64.Build.0 = Debug|x64
 		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.ActiveCfg = Debug|x64
 		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.Build.0 = Debug|x64
-		{409BD3C2-2768-4C04-8EAE-7155EF23E89D}.Debug|x64.ActiveCfg = Debug|x64
-		{409BD3C2-2768-4C04-8EAE-7155EF23E89D}.Debug|x64.Build.0 = Debug|x64
 		{4957333D-0753-445B-81F3-97FA80D4CC53}.Debug|x64.ActiveCfg = Debug|x64
 		{4957333D-0753-445B-81F3-97FA80D4CC53}.Debug|x64.Build.0 = Debug|x64
+		{409BD3C2-2768-4C04-8EAE-7155EF23E89D}.Debug|x64.ActiveCfg = Debug|x64
+		{409BD3C2-2768-4C04-8EAE-7155EF23E89D}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
