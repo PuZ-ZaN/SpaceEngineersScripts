@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayCastTestScript", "RayCas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPilotWithRaycastExperiments", "AutoPilotWithRaycastExperiments\AutoPilotWithRaycastExperiments.csproj", "{409BD3C2-2768-4C04-8EAE-7155EF23E89D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResearchTranslateCoords", "ResearchTranslateCoords\ResearchTranslateCoords.csproj", "{134A5FEC-64EF-44CE-9AC2-E12F5CAE894C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurretRotorScript", "TurretRotorScript\TurretRotorScript.csproj", "{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -36,6 +40,10 @@ Global
 		{4957333D-0753-445B-81F3-97FA80D4CC53}.Debug|x64.Build.0 = Debug|x64
 		{409BD3C2-2768-4C04-8EAE-7155EF23E89D}.Debug|x64.ActiveCfg = Debug|x64
 		{409BD3C2-2768-4C04-8EAE-7155EF23E89D}.Debug|x64.Build.0 = Debug|x64
+		{134A5FEC-64EF-44CE-9AC2-E12F5CAE894C}.Debug|x64.ActiveCfg = Debug|x64
+		{134A5FEC-64EF-44CE-9AC2-E12F5CAE894C}.Debug|x64.Build.0 = Debug|x64
+		{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}.Debug|x64.ActiveCfg = Debug|x64
+		{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

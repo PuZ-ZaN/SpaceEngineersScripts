@@ -26,115 +26,91 @@ namespace IngameScript
 {
     partial class Program : MyGridProgram
     {
-        /*IMyCameraBlock camera;
-        IMyRemoteControl remoteControl;
-        IMyCockpit cockpit;
-        IMyTextSurface display;
+        double DropHeight = 20000; //Высота сброса бомбы
+
+        IMyCameraBlock Camera; //Объявляем блоки
+        IMyTextPanel LCD;
+
+        Vector3D PlanetXYZ; //Координаты центра планеты
+        Vector3D BaseXYZ; //Координаты базы
+        Vector3D DropPointXYZ; //Здесь будут координаты точки сброса
+
+
+        //Конструктор скрипта
+        // ------------------------------------------
+
         public Program()
         {
-            camera = GridTerminalSystem.GetBlockWithName("Camera") as IMyCameraBlock;
-            remoteControl = GridTerminalSystem.GetBlockWithName("RemoteControl") as IMyRemoteControl;
-            cockpit = GridTerminalSystem.GetBlockWithName("Cockpit") as IMyCockpit;
-            
-            display = cockpit.GetSurface(0);
-            camera.EnableRaycast = true;
+            //Находим блоки
+            Camera = GridTerminalSystem.GetBlockWithName("Cam") as IMyCameraBlock;
+            if (Camera == null)
+                throw new Exception("Cam is null!");
+            Camera.EnableRaycast = true;
 
-            Runtime.UpdateFrequency = UpdateFrequency.Update10;
+            LCD = GridTerminalSystem.GetBlockWithName("LCD") as IMyTextPanel;
+
+            if (LCD == null)
+                throw new Exception("LCD is null!");
+
+            PlanetXYZ = new Vector3D();
+            BaseXYZ = new Vector3D();
+            DropPointXYZ = new Vector3D();
         }
 
-       
-        public void Main(string argument, UpdateType updateSource)
+        public void Main(string arg, UpdateType updateSource)
         {
-
-            var strRes = new StringBuilder();
-
-            var canScan = camera.CanScan(1000);
-            
-            strRes.Append("\nCan scan?: " + canScan.ToString());
-            strRes.Append("\nAvailableScanRange: " + camera.AvailableScanRange);
-            if (canScan)
+            //Разбор аргументов. Вызов функций raycast и расчета точки сброса.
+            if (arg == "Detect")
             {
-                var rayObj = camera.Raycast(camera.RaycastDistanceLimit);
-                strRes.Append("\nName " + rayObj.Name);
-                strRes.Append("\nDist " + (rayObj.Position + Me.CubeGrid.GetPosition()).ToString());
-                strRes.Append("\nType: " + rayObj.Type.ToString());
+                Detect();
             }
-            display.WriteText(strRes);
-        }*/
+            else if (arg == "Calculate")
+            {
+                CalculateDropPoint();
+            }
 
-        //===============================================
-        IMyCameraBlock camera;
-        IMyTextSurface display;
-
-        const double SCAN_DISTANCE = 1;
-        const float PITCH = 0;
-        const float YAW = 0;
-
-        private StringBuilder sb = new StringBuilder();
-        private StringBuilder enemies = new StringBuilder();
-        private MyDetectedEntityInfo info;
-        private List<MyDetectedEntityInfo> detectedEnemies = new List<MyDetectedEntityInfo>();
-        public Program()
-        {
-            camera = GridTerminalSystem.GetBlockWithName("Camera") as IMyCameraBlock;
-            display = GridTerminalSystem.GetBlockWithName("Display") as IMyTextSurface;
-            Runtime.UpdateFrequency = UpdateFrequency.Update100;
         }
-        public void Main(string argument, UpdateType updateSource)
+
+        // Рейкаст и установка координат центра планеты и базы
+        void Detect()
         {
-            Echo("wrf");
-            if (camera.CanScan(SCAN_DISTANCE))
-                info = camera.Raycast(SCAN_DISTANCE, PITCH, YAW);
-            else
-                info = new MyDetectedEntityInfo();
+            MyDetectedEntityInfo DetectedObject = Camera.Raycast(10000, 0, 0);
 
-            Echo(camera.EnableRaycast.ToString());
-            Echo(camera.AvailableScanRange.ToString());
-            sb.AppendLine();
-            sb.Append(camera.CustomName);
-            sb.AppendLine();
-            sb.Append("EntityID: " + info.EntityId);
-            sb.AppendLine();
-            sb.Append("Name: " + info.Name);
-            sb.AppendLine();
-            sb.Append("Type: " + info.Type);
-            sb.AppendLine();
-            sb.Append("Velocity: " + info.Velocity.ToString("0.000"));
-            sb.AppendLine();
-            sb.Append("Relationship: " + info.Relationship);
-            sb.AppendLine();
-            sb.Append("Size: " + info.BoundingBox.Size.ToString("0.000"));
-            sb.AppendLine();
-            sb.Append("Position: " + info.Position.ToString("0.000"));
+            LCD.WriteText("Обнаружено: \n", false);
+            LCD.WriteText("Объект: " + DetectedObject.Name + "\n", true);
+            LCD.WriteText("Координаты: \n", true);
+            LCD.WriteText("     X: " + DetectedObject.Position.X + "\n", true);
+            LCD.WriteText("     Y: " + DetectedObject.Position.Y + "\n", true);
+            LCD.WriteText("     Z: " + DetectedObject.Position.Z + "\n", true);
 
-            if (info.HitPosition.HasValue)
+            string GPS = "\nGPS:" + DetectedObject.Name + ":" + DetectedObject.Position.X + ":"
+                                  + DetectedObject.Position.Y + ":"
+                                  + DetectedObject.Position.Z + ":";
+            LCD.WriteText(GPS, true);
+            //Если обнаруженный объект - планета, устанавливаем PlanetXYZ
+            if (DetectedObject.Type == MyDetectedEntityType.Planet)
             {
-                int index = detectedEnemies.FindIndex(f => f.EntityId == info.EntityId);
-                if (index >= 0)
-                    Echo("already have that enemy grid, skiping");
-                else
-                    detectedEnemies.Add(info);
+                PlanetXYZ = DetectedObject.Position;
             }
-
-            sb.AppendLine();
-            sb.Append("Range: " + camera.AvailableScanRange.ToString());
-            sb.AppendLine();
-            foreach (var enem in detectedEnemies)
+            //Если обнаруженный объект - большой грид, устанавливаем BaseXYZ
+            else if (DetectedObject.Type == MyDetectedEntityType.LargeGrid)
             {
-                enemies.AppendLine();
-                enemies.Append(enem.Name);
-                enemies.AppendLine();
-                enemies.Append("Hit: " + info.HitPosition.Value.ToString("0.000"));
-                enemies.AppendLine();
-                enemies.Append("Distance: " + Vector3D.Distance(camera.GetPosition(), info.HitPosition.Value).ToString("0.00"));
-                enemies.AppendLine();
+                BaseXYZ = DetectedObject.Position;
             }
-            display.WriteText(sb.ToString());
-            display.WriteText(enemies.ToString());
-            Echo(sb.ToString());
-            Echo(enemies.ToString());
-            sb.Clear();
-            enemies.Clear();
+        }
+
+        //Расчет точки сброса
+        void CalculateDropPoint()
+        {
+            //Вектор вертикали, проходящий через базу
+            Vector3D VerticalVector = BaseXYZ - PlanetXYZ;
+            //Нормализация вертикали
+            Vector3D VerticalNorm = Vector3D.Normalize(VerticalVector);
+            //Расчет точки сброса
+            DropPointXYZ = BaseXYZ + VerticalNorm * DropHeight;
+            //Создаем GPS-метку
+            string GPS = "GPS:DropPoint:" + DropPointXYZ.X + ":" + DropPointXYZ.Y + ":" + DropPointXYZ.Z + ":";
+            LCD.WriteText("Точка сброса:\n" + GPS, false);
         }
     }
 }
