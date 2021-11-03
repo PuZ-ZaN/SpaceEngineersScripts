@@ -21,7 +21,9 @@ using VRage.Game.ModAPI.Ingame.Utilities;
 using VRage.Game.ObjectBuilders.Definitions;
 
 using VRageMath;
-
+/*
+ Автопилот для корабля, следует за игроком
+ */
 namespace IngameScript
 {
     partial class Program : MyGridProgram
