@@ -7,7 +7,6 @@ using SpaceEngineers.Game.ModAPI.Ingame;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 
@@ -29,9 +28,9 @@ namespace IngameScript
     partial class Program : MyGridProgram
     {
         //==========Settings========
-        const string RemoteControlName = "RemoteControl";
+        const string RemoteControlName = "RemoteControl (доступ запрещен)";
         const string DisplayName = "Display";
-        bool UseDisplay = true;
+        bool UseDisplay = false;
         const bool WaitForFreeWay = true;
         const bool IsServer = false;
         const int MaxHorizontalAndDownSpeed_0_100 = 50;
@@ -42,6 +41,8 @@ namespace IngameScript
         //========EndSettings========
         IMyRemoteControl remoteControl;
         IMyTextPanel display;
+
+        StackFSM brain;
 
         #region Vars which used in Main
         StringBuilder DisplayStr;
@@ -57,6 +58,8 @@ namespace IngameScript
         Vector3D PlayerElevationFromCenter;
         //при неудачной попытке определить высоту останется true, это позволит кораблю остановиться рядом с игроком (см. условие остановки)
         bool IsDiffElevationsWithinStop = true;
+        bool IsGridNearPlayer;
+        IMyTextSurface MeSurface0;
         #endregion
         #region PulseVars
         byte pulse = 0;
@@ -72,7 +75,13 @@ namespace IngameScript
             else
                 pulseSign = new List<string>() { @"\", @"|", @"/", @"-" };
             #endregion
+            MeSurface0 = Me.GetSurface(0);
             remoteControl = GridTerminalSystem.GetBlockWithName(RemoteControlName) as IMyRemoteControl;
+            if (remoteControl == null)
+            {
+                Echo("RC is NULL!");
+                MeSurface0.WriteText("RC is NULL!");
+            }
             remoteControl.WaitForFreeWay = WaitForFreeWay;
             remoteControl.FlightMode = FlightMode.OneWay;
             remoteControl.SpeedLimit = MaxHorizontalAndDownSpeed_0_100;
@@ -91,77 +100,86 @@ namespace IngameScript
                     UseDisplay = false;
             }
             Runtime.UpdateFrequency = UpdateFrequency.Update100;
+            brain = new StackFSM();
+            brain.PushState(FindPeoplesNear);
         }
 
         public void Main(string argument, UpdateType updateSource)
         {
             #region Pulse
             if (!IsServer)
+            {
                 Echo(pulseSign[pulse++]);
+                MeSurface0.WriteText(pulseSign[pulse++]);
+            }
             if (pulse >= pulseSign.Count)
                 pulse = 0;
             #endregion
+            brain.Update();
+            var mName = brain.getCurrentState().Method.Name;
+            Echo(mName);
+            MeSurface0.WriteText(mName);
             //Если есть игроки рядом
-            if (remoteControl.GetNearestPlayer(out nearestPlayerCrds))
-            {
-                gridPosition = Me.CubeGrid.GetPosition();
-                distanceToPlayer = Vector3D.Distance(nearestPlayerCrds, gridPosition);
-                gravGrid = remoteControl.GetNaturalGravity();
-                goalCoords = nearestPlayerCrds;
-                
-                //Если грид на планете делает траекторию не прямой
-                if (gravGrid.Length() > 0 && remoteControl.TryGetPlanetElevation(MyPlanetElevation.Surface, out GridElevationFromSurface))
-                {
-                    goalHeight = distanceToPlayer / (GridElevationFromSurface == 0 ? 1 : GridElevationFromSurface);
-                    goalCoords = nearestPlayerCrds - gravGrid * goalHeight;//gravGrid * 0.2f;
-                    if (remoteControl.TryGetPlanetPosition(out PlayerElevationFromCenter))
-                    {
-                        MeElevation = Vector3D.Distance(gridPosition, PlayerElevationFromCenter);
-                        PlayerElevation = Vector3D.Distance(nearestPlayerCrds, PlayerElevationFromCenter);
-                        IsDiffElevationsWithinStop = Math.Abs(PlayerElevation - MeElevation) < Math.Abs(StopDistanceVertical / 2);
-                    }
-                }
+            //if (remoteControl.GetNearestPlayer(out nearestPlayerCrds))
+            //{
+            //    gridPosition = Me.CubeGrid.GetPosition();
+            //    distanceToPlayer = Vector3D.Distance(nearestPlayerCrds, gridPosition);
+            //    gravGrid = remoteControl.GetNaturalGravity();
+            //    goalCoords = nearestPlayerCrds;
 
-                //Замедление если близко к игроку
-                var IsGridNearPlayer = distanceToPlayer <= DecelerationDistance;
-                if (IsGridNearPlayer)
-                {
-                    remoteControl.SpeedLimit = DecelerationValue;
-                    remoteControl.SetDockingMode(false);
-                    remoteControl.SetCollisionAvoidance(false);
-                }
-                else
-                {
-                    remoteControl.SpeedLimit = MaxHorizontalAndDownSpeed_0_100;
-                    remoteControl.SetDockingMode(true);
-                    remoteControl.SetCollisionAvoidance(true);
-                }
+            //    //Если грид на планете делает траекторию не прямой
+            //    if (gravGrid.Length() > 0 && remoteControl.TryGetPlanetElevation(MyPlanetElevation.Surface, out GridElevationFromSurface))
+            //    {
+            //        goalHeight = distanceToPlayer / (GridElevationFromSurface == 0 ? 1 : GridElevationFromSurface);
+            //        goalCoords = nearestPlayerCrds - gravGrid * goalHeight;//gravGrid * 0.2f;
+            //        if (remoteControl.TryGetPlanetPosition(out PlayerElevationFromCenter))
+            //        {
+            //            MeElevation = Vector3D.Distance(gridPosition, PlayerElevationFromCenter);
+            //            PlayerElevation = Vector3D.Distance(nearestPlayerCrds, PlayerElevationFromCenter);
+            //            IsDiffElevationsWithinStop = Math.Abs(PlayerElevation - MeElevation) < Math.Abs(StopDistanceVertical / 2);
+            //        }
+            //    }
 
-                //Решает нужно ли лететь к игроку
-                if (distanceToPlayer > StopDistance && !IsDiffElevationsWithinStop)
-                {
-                    remoteControl.ClearWaypoints();
-                    remoteControl.AddWaypoint(new MyWaypointInfo("PlayerCoords", goalCoords));
-                    remoteControl.SetAutoPilotEnabled(true);
-                }
-                #region DisplayAndEchoOutput
-                DisplayStr.Append(String.Format("NearestPlayer in {0} meters", distanceToPlayer));
-                DisplayStr.Append("\n");
-                DisplayStr.Append(distanceToPlayer > StopDistance);
-                DisplayStr.Append("\n");
-                DisplayStr.Append(IsDiffElevationsWithinStop);
-                DisplayStr.Append(String.Format("\nHeight {0}", goalHeight));
-                var normalize = Vector3D.Normalize(nearestPlayerCrds);
-                var dot = Vector3D.Dot(remoteControl.WorldMatrix.GetDirectionVector(Base6Directions.Direction.Up), WorldToLocal(normalize));
-                DisplayStr.Append(String.Format("\nDotIs {0}", dot));
-                Echo(DisplayStr.ToString());
-                if (UseDisplay)
-                    display.WriteText(DisplayStr);
-                DisplayStr.Clear();
-                #endregion
-            }
-            else
-                display.WriteText("NearestPlayer not found!");
+            //    //Замедление если близко к игроку
+            //    IsGridNearPlayer = distanceToPlayer <= DecelerationDistance;
+            //    if (IsGridNearPlayer)
+            //    {
+            //        remoteControl.SpeedLimit = DecelerationValue;
+            //        remoteControl.SetDockingMode(false);
+            //        remoteControl.SetCollisionAvoidance(false);
+            //    }
+            //    else
+            //    {
+            //        remoteControl.SpeedLimit = MaxHorizontalAndDownSpeed_0_100;
+            //        remoteControl.SetDockingMode(true);
+            //        remoteControl.SetCollisionAvoidance(true);
+            //    }
+
+            //    //Решает нужно ли лететь к игроку
+            //    if (distanceToPlayer > StopDistance && !IsDiffElevationsWithinStop)
+            //    {
+            //        remoteControl.ClearWaypoints();
+            //        remoteControl.AddWaypoint(new MyWaypointInfo("PlayerCoords", goalCoords));
+            //        remoteControl.SetAutoPilotEnabled(true);
+            //    }
+            //    #region DisplayAndEchoOutput
+            //    DisplayStr.Append(String.Format("NearestPlayer in {0} meters", distanceToPlayer));
+            //    DisplayStr.Append("\n");
+            //    DisplayStr.Append(distanceToPlayer > StopDistance);
+            //    DisplayStr.Append("\n");
+            //    DisplayStr.Append(IsDiffElevationsWithinStop);
+            //    DisplayStr.Append(String.Format("\nHeight {0}", goalHeight));
+            //    var normalize = Vector3D.Normalize(nearestPlayerCrds);
+            //    var dot = Vector3D.Dot(remoteControl.WorldMatrix.GetDirectionVector(Base6Directions.Direction.Up), WorldToLocal(normalize));
+            //    DisplayStr.Append(String.Format("\nDotIs {0}", dot));
+            //    Echo(DisplayStr.ToString());
+            //    if (UseDisplay)
+            //        display.WriteText(DisplayStr);
+            //    DisplayStr.Clear();
+            //    #endregion
+            //}
+            //else
+            //    display.WriteText("NearestPlayer not found!");
         }
         Vector3D WorldToLocal(Vector3D nearestPlayerCrds)
         {
@@ -175,6 +193,57 @@ namespace IngameScript
             Vector3D worldPosition = remoteControl.CubeGrid.WorldMatrix.Translation + world1Direction;
             return worldPosition;
         }
-        //
+        //StatesAsFunction
+        void FindPeoplesNear()
+        {
+            if (remoteControl.GetNearestPlayer(out nearestPlayerCrds))
+            {
+                gridPosition = Me.CubeGrid.GetPosition();
+                distanceToPlayer = Vector3D.Distance(nearestPlayerCrds, gridPosition);
+                gravGrid = remoteControl.GetNaturalGravity();
+                goalCoords = nearestPlayerCrds;
+
+                //Если грид на планете делает траекторию не прямой
+                if (gravGrid.Length() > 0 && remoteControl.TryGetPlanetElevation(MyPlanetElevation.Surface, out GridElevationFromSurface))
+                {
+                    goalHeight = distanceToPlayer / (GridElevationFromSurface == 0 ? 1 : GridElevationFromSurface);
+                    goalCoords = nearestPlayerCrds - gravGrid * goalHeight;//gravGrid * 0.2f;
+                    if (remoteControl.TryGetPlanetPosition(out PlayerElevationFromCenter))
+                    {
+                        MeElevation = Vector3D.Distance(gridPosition, PlayerElevationFromCenter);
+                        PlayerElevation = Vector3D.Distance(nearestPlayerCrds, PlayerElevationFromCenter);
+                        IsDiffElevationsWithinStop = Math.Abs(PlayerElevation - MeElevation) < Math.Abs(StopDistanceVertical / 2);
+                    }
+                }
+                brain.PopState();
+                brain.PushState(FlyToPlayer);
+            }
+        }
+
+        void FlyToPlayer()
+        {
+            IsGridNearPlayer = distanceToPlayer <= DecelerationDistance;
+            if (IsGridNearPlayer)
+            {
+                remoteControl.SpeedLimit = DecelerationValue;
+                remoteControl.SetDockingMode(false);
+                remoteControl.SetCollisionAvoidance(false);
+            }
+            else
+            {
+                remoteControl.SpeedLimit = MaxHorizontalAndDownSpeed_0_100;
+                remoteControl.SetDockingMode(true);
+                remoteControl.SetCollisionAvoidance(true);
+            }
+
+            if (distanceToPlayer > StopDistance && !IsDiffElevationsWithinStop)
+            {
+                remoteControl.ClearWaypoints();
+                remoteControl.AddWaypoint(new MyWaypointInfo("PlayerCoords", goalCoords));
+                remoteControl.SetAutoPilotEnabled(true);
+            }
+            brain.PopState();
+            brain.PushState(FindPeoplesNear);
+        }
     }
 }
