@@ -7,7 +7,7 @@ using SpaceEngineers.Game.ModAPI.Ingame;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+//using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 
@@ -30,10 +30,13 @@ namespace IngameScript
 
         IMyCameraBlock Camera; //Объявляем блоки
         IMyTextPanel LCD;
+        IMyRemoteControl RC;
 
         Vector3D PlanetXYZ; //Координаты центра планеты
         Vector3D BaseXYZ; //Координаты базы
         Vector3D DropPointXYZ; //Здесь будут координаты точки сброса
+
+        Dictionary<string, Action> behavior;
 
 
         //Конструктор скрипта
@@ -41,16 +44,24 @@ namespace IngameScript
 
         public Program()
         {
+            behavior = new Dictionary<string, Action>() { 
+                { "Detect", () => Detect() },
+                { "Calculate", () => CalculateDropPoint() },
+                { "Fly", () => FlyToDropPoint() },
+            };
             //Находим блоки
-            Camera = GridTerminalSystem.GetBlockWithName("Cam") as IMyCameraBlock;
+            LCD = GridTerminalSystem.GetBlockWithName("LCD") as IMyTextPanel;
+            if (LCD == null)
+                throw new Exception("LCD is null!");
+
+            Camera = GridTerminalSystem.GetBlockWithName("Camera") as IMyCameraBlock;
             if (Camera == null)
                 throw new Exception("Cam is null!");
             Camera.EnableRaycast = true;
 
-            LCD = GridTerminalSystem.GetBlockWithName("LCD") as IMyTextPanel;
-
-            if (LCD == null)
-                throw new Exception("LCD is null!");
+            RC = GridTerminalSystem.GetBlockWithName("RemoteControl") as IMyRemoteControl;
+            if (Camera == null)
+                throw new Exception("RC is null!");
 
             PlanetXYZ = new Vector3D();
             BaseXYZ = new Vector3D();
@@ -59,15 +70,19 @@ namespace IngameScript
 
         public void Main(string arg, UpdateType updateSource)
         {
-            //Разбор аргументов. Вызов функций raycast и расчета точки сброса.
-            if (arg == "Detect")
-            {
-                Detect();
-            }
-            else if (arg == "Calculate")
-            {
-                CalculateDropPoint();
-            }
+            if (behavior.Keys.Contains(arg))
+                behavior[arg]();
+            else
+                LCD.WriteText("incorrect arg");
+            ////Разбор аргументов. Вызов функций raycast и расчета точки сброса.
+            //if (arg == "Detect")
+            //{
+            //    Detect();
+            //}
+            //else if (arg == "Calculate")
+            //{
+            //    CalculateDropPoint();
+            //}
 
         }
 
@@ -111,6 +126,13 @@ namespace IngameScript
             //Создаем GPS-метку
             string GPS = "GPS:DropPoint:" + DropPointXYZ.X + ":" + DropPointXYZ.Y + ":" + DropPointXYZ.Z + ":";
             LCD.WriteText("Точка сброса:\n" + GPS, false);
+        }
+        void FlyToDropPoint()
+        {
+            LCD.WriteText("Лечу в точку сброса");
+            RC.ClearWaypoints();
+            RC.AddWaypoint(DropPointXYZ, "DropPoint");
+            RC.SetAutoPilotEnabled(true);
         }
     }
 }
