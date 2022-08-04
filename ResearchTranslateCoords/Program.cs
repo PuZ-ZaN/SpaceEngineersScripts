@@ -22,6 +22,9 @@ using VRage.Game.ObjectBuilders.Definitions;
 
 using VRageMath;
 
+/*
+ Эксперименты с преобразованием локальных координат в глобальные и наоборот
+ */
 namespace IngameScript
 {
     partial class Program : MyGridProgram

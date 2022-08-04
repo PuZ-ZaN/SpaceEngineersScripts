@@ -21,7 +21,11 @@ using VRage.Game.ModAPI.Ingame.Utilities;
 using VRage.Game.ObjectBuilders.Definitions;
 
 using VRageMath;
-
+/*
+ Позволяет управлять поршневым механизмом как кораблем вместо управления поршнями и роторами напрямую
+ см. GridScheme.png для постройки схемы
+ поддерживает группы поршней X и Y
+ */
 namespace IngameScript
 {
     partial class Program : MyGridProgram
@@ -43,22 +47,21 @@ namespace IngameScript
             rotorB = GridTerminalSystem.GetBlockWithName("RotorB") as IMyMotorStator;
             rotorC = GridTerminalSystem.GetBlockWithName("RotorC") as IMyMotorStator;
             LCD = cockpit.GetSurface(0);
-
             Runtime.UpdateFrequency = UpdateFrequency.Update10;
         }
 
         void Main()
         {
             //код для нескольких поршней
-            float r = 17.5f;
+            float r = 17.5f;// r - это расстояние между осями RotorA и RotorB при сложенном горизонтальном поршне
+            //Моментальная скорость для горизонтальных поршней
+            //Для одного поршня:
+            //float r = 17.5f + pistonX.CurrentPosition;
             foreach (var p in pistonX)
             {
                 r += p.CurrentPosition;
             }
-            //float r = 17.5f + pistonX.CurrentPosition;// 17.5 - это расстояние между осями RotorA и RotorB при сложенном горизонтальном поршне
-            //Моментальная скорость для горизонтального поршня
             //Теперь учитываем углы и ротора B, и ротора C
-
             float dX = (float)((cockpit.MoveIndicator.Z * Math.Cos(rotorC.Angle) - cockpit.MoveIndicator.Y * Math.Sin(rotorC.Angle)) * Math.Cos(rotorB.Angle) + cockpit.MoveIndicator.X * Math.Cos(rotorB.Angle + Math.PI / 2));
             //А это для ротора А
             float dR = (float)((cockpit.MoveIndicator.Z * Math.Cos(rotorC.Angle) - cockpit.MoveIndicator.Y * Math.Sin(rotorC.Angle)) * Math.Sin(rotorB.Angle) + cockpit.MoveIndicator.X * Math.Sin(rotorB.Angle + Math.PI * 0.5)) / r;

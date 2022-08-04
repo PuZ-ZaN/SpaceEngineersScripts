@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoHorizon", "AutoHorizon\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PistonManipulator", "PistonManipulator\PistonManipulator.csproj", "{4F533301-819D-4A33-BBCB-0CEFFC240298}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PistonManipulatorDirectControl", "PistonManipulatorDirectControl\PistonManipulatorDirectControl.csproj", "{F3812E88-EE01-4E5C-A332-578293B06990}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAutoPilot", "CarAutoPilot\CarAutoPilot.csproj", "{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoverCraftControl", "HoverCraftControl\HoverCraftControl.csproj", "{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}"
@@ -21,7 +19,33 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResearchTranslateCoords", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurretRotorScript", "TurretRotorScript\TurretRotorScript.csproj", "{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutopilotRepeater", "AutopilotRepeater\AutopilotRepeater.csproj", "{2B12F3C3-CA79-4E4F-9C8C-5F5F5D30AAFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentRequesterReworked", "ComponentRequesterReworked\ComponentRequesterReworked.csproj", "{46B3D5EF-C192-45FE-BEBD-8901B0916EB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollisionAvoidanceCustom", "CollisionAvoidanceCustom\CollisionAvoidanceCustom.csproj", "{F2CDB4FC-4B40-44FC-A9A4-8BF0D5D80F0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamikadzeDroneAI", "KamikadzeDroneAI\KamikadzeDroneAI.csproj", "{02DA12D7-07F7-43C4-8C60-57571FAEDB38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterGridCallTimer", "InterGridCallTimer\InterGridCallTimer.csproj", "{EC1507BD-B283-4C80-8820-FA0C24F442E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPilotPointRaycast", "AutoPilotPointRaycast\AutoPilotPointRaycast.csproj", "{D33DAE02-0010-48DF-874D-EE41D91BA35A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APRaycastTestSimply", "APRaycastTestSimply\APRaycastTestSimply.csproj", "{A11717FA-ACA8-43D7-BAFB-9F26BC98B45A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalMatrixTest", "LocalMatrixTest\LocalMatrixTest.csproj", "{17E713B1-4A49-4EED-88DD-9D446C67193E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorsCasting", "VectorsCasting\VectorsCasting.shproj", "{61EBA249-19F3-48B6-A25B-A4CEE90168BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSeeOnPoint", "AutoSeeOnPoint\AutoSeeOnPoint.csproj", "{5FC42A61-3AF9-495D-BE18-6948E47A57C8}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		VectorsCasting\VectorsCasting.projitems*{17e713b1-4a49-4eed-88dd-9d446c67193e}*SharedItemsImports = 4
+		VectorsCasting\VectorsCasting.projitems*{5fc42a61-3af9-495d-be18-6948e47a57c8}*SharedItemsImports = 4
+		VectorsCasting\VectorsCasting.projitems*{61eba249-19f3-48b6-a25b-a4cee90168ba}*SharedItemsImports = 13
+		VectorsCasting\VectorsCasting.projitems*{d33dae02-0010-48df-874d-ee41d91ba35a}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 	EndGlobalSection
@@ -30,8 +54,6 @@ Global
 		{F4EDDC2A-BF7D-4D5F-93A5-860EEBD45B7D}.Debug|x64.Build.0 = Debug|x64
 		{4F533301-819D-4A33-BBCB-0CEFFC240298}.Debug|x64.ActiveCfg = Debug|x64
 		{4F533301-819D-4A33-BBCB-0CEFFC240298}.Debug|x64.Build.0 = Debug|x64
-		{F3812E88-EE01-4E5C-A332-578293B06990}.Debug|x64.ActiveCfg = Debug|x64
-		{F3812E88-EE01-4E5C-A332-578293B06990}.Debug|x64.Build.0 = Debug|x64
 		{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}.Debug|x64.ActiveCfg = Debug|x64
 		{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}.Debug|x64.Build.0 = Debug|x64
 		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.ActiveCfg = Debug|x64
@@ -44,6 +66,24 @@ Global
 		{134A5FEC-64EF-44CE-9AC2-E12F5CAE894C}.Debug|x64.Build.0 = Debug|x64
 		{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}.Debug|x64.ActiveCfg = Debug|x64
 		{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}.Debug|x64.Build.0 = Debug|x64
+		{2B12F3C3-CA79-4E4F-9C8C-5F5F5D30AAFB}.Debug|x64.ActiveCfg = Debug|x64
+		{2B12F3C3-CA79-4E4F-9C8C-5F5F5D30AAFB}.Debug|x64.Build.0 = Debug|x64
+		{46B3D5EF-C192-45FE-BEBD-8901B0916EB7}.Debug|x64.ActiveCfg = Debug|x64
+		{46B3D5EF-C192-45FE-BEBD-8901B0916EB7}.Debug|x64.Build.0 = Debug|x64
+		{F2CDB4FC-4B40-44FC-A9A4-8BF0D5D80F0B}.Debug|x64.ActiveCfg = Debug|x64
+		{F2CDB4FC-4B40-44FC-A9A4-8BF0D5D80F0B}.Debug|x64.Build.0 = Debug|x64
+		{02DA12D7-07F7-43C4-8C60-57571FAEDB38}.Debug|x64.ActiveCfg = Debug|x64
+		{02DA12D7-07F7-43C4-8C60-57571FAEDB38}.Debug|x64.Build.0 = Debug|x64
+		{EC1507BD-B283-4C80-8820-FA0C24F442E6}.Debug|x64.ActiveCfg = Debug|x64
+		{EC1507BD-B283-4C80-8820-FA0C24F442E6}.Debug|x64.Build.0 = Debug|x64
+		{D33DAE02-0010-48DF-874D-EE41D91BA35A}.Debug|x64.ActiveCfg = Debug|x64
+		{D33DAE02-0010-48DF-874D-EE41D91BA35A}.Debug|x64.Build.0 = Debug|x64
+		{A11717FA-ACA8-43D7-BAFB-9F26BC98B45A}.Debug|x64.ActiveCfg = Debug|x64
+		{A11717FA-ACA8-43D7-BAFB-9F26BC98B45A}.Debug|x64.Build.0 = Debug|x64
+		{17E713B1-4A49-4EED-88DD-9D446C67193E}.Debug|x64.ActiveCfg = Debug|x64
+		{17E713B1-4A49-4EED-88DD-9D446C67193E}.Debug|x64.Build.0 = Debug|x64
+		{5FC42A61-3AF9-495D-BE18-6948E47A57C8}.Debug|x64.ActiveCfg = Debug|x64
+		{5FC42A61-3AF9-495D-BE18-6948E47A57C8}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
