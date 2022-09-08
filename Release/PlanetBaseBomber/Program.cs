@@ -74,16 +74,6 @@ namespace IngameScript
                 behavior[arg]();
             else
                 LCD.WriteText("incorrect arg");
-            ////Разбор аргументов. Вызов функций raycast и расчета точки сброса.
-            //if (arg == "Detect")
-            //{
-            //    Detect();
-            //}
-            //else if (arg == "Calculate")
-            //{
-            //    CalculateDropPoint();
-            //}
-
         }
 
         // Рейкаст и установка координат центра планеты и базы

@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAutoPilot", "Maintaining\CarAutoPilot\CarAutoPilot.csproj", "{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoverCraftControl", "Maintaining\HoverCraftControl\HoverCraftControl.csproj", "{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPilotWithRaycastExperiments", "Maintaining\AutoPilotWithRaycastExperiments\AutoPilotWithRaycastExperiments.csproj", "{409BD3C2-2768-4C04-8EAE-7155EF23E89D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollisionAvoidanceCustom", "Maintaining\CollisionAvoidanceCustom\CollisionAvoidanceCustom.csproj", "{F2CDB4FC-4B40-44FC-A9A4-8BF0D5D80F0B}"
@@ -41,12 +39,35 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PistonManipulator", "C:\Use
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurretRotorScript", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Release\TurretRotorScript\TurretRotorScript.csproj", "{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarPanelAutoRotation", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Maintaining\SolarPanelAutoRotation\SolarPanelAutoRotation.csproj", "{AA89323E-3E9B-4E29-B5E5-A64CC4A5B7F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterGridCallTimer", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Maintaining\InterGridCallTimer\InterGridCallTimer.csproj", "{EC1507BD-B283-4C80-8820-FA0C24F442E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PistonManipulatorDirectControl", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Maintaining\PistonManipulatorDirectControl\PistonManipulatorDirectControl.csproj", "{F3812E88-EE01-4E5C-A332-578293B06990}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotateNFlyStraightOnPoint", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Maintaining\RotateNFlyStraightOnPoint\RotateNFlyStraightOnPoint.csproj", "{F5C6AF4C-9810-4237-957F-27FD7106D462}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Gyros", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\Gyros\Gyros.shproj", "{C874236D-564F-4123-8FB6-A309CC91142C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoverCraftControl", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Release\HoverCraftControl\HoverCraftControl.csproj", "{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetBaseBomber", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Release\PlanetBaseBomber\PlanetBaseBomber.csproj", "{4957333D-0753-445B-81F3-97FA80D4CC53}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RaycastVision", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\RaycastVision\RaycastVision.shproj", "{83D2CD85-5F0B-47C6-93C5-A797343B3D27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docking", "Docking\Docking.csproj", "{13E7E832-E6B2-4556-BDD1-B7C8CEB40608}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Common\VectorsCasting\VectorsCasting.projitems*{13e7e832-e6b2-4556-bdd1-b7c8ceb40608}*SharedItemsImports = 4
 		Common\VectorsCasting\VectorsCasting.projitems*{17e713b1-4a49-4eed-88dd-9d446c67193e}*SharedItemsImports = 4
 		Common\VectorsCasting\VectorsCasting.projitems*{5fc42a61-3af9-495d-be18-6948e47a57c8}*SharedItemsImports = 4
 		Common\VectorsCasting\VectorsCasting.projitems*{61eba249-19f3-48b6-a25b-a4cee90168ba}*SharedItemsImports = 13
+		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\RaycastVision\RaycastVision.projitems*{83d2cd85-5f0b-47c6-93c5-a797343b3d27}*SharedItemsImports = 13
+		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\Gyros\Gyros.projitems*{c874236d-564f-4123-8fb6-a309cc91142c}*SharedItemsImports = 13
 		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\VectorsCasting\VectorsCasting.projitems*{d33dae02-0010-48df-874d-ee41d91ba35a}*SharedItemsImports = 4
+		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\Gyros\Gyros.projitems*{f5c6af4c-9810-4237-957f-27fd7106d462}*SharedItemsImports = 4
+		Common\VectorsCasting\VectorsCasting.projitems*{f5c6af4c-9810-4237-957f-27fd7106d462}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -54,8 +75,6 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}.Debug|x64.ActiveCfg = Debug|x64
 		{87D08FBD-DA30-40B9-8954-58ABA30DD5A4}.Debug|x64.Build.0 = Debug|x64
-		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.ActiveCfg = Debug|x64
-		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.Build.0 = Debug|x64
 		{409BD3C2-2768-4C04-8EAE-7155EF23E89D}.Debug|x64.ActiveCfg = Debug|x64
 		{409BD3C2-2768-4C04-8EAE-7155EF23E89D}.Debug|x64.Build.0 = Debug|x64
 		{F2CDB4FC-4B40-44FC-A9A4-8BF0D5D80F0B}.Debug|x64.ActiveCfg = Debug|x64
@@ -82,13 +101,26 @@ Global
 		{4F533301-819D-4A33-BBCB-0CEFFC240298}.Debug|x64.Build.0 = Debug|x64
 		{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}.Debug|x64.ActiveCfg = Debug|x64
 		{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3}.Debug|x64.Build.0 = Debug|x64
+		{AA89323E-3E9B-4E29-B5E5-A64CC4A5B7F4}.Debug|x64.ActiveCfg = Debug|x64
+		{AA89323E-3E9B-4E29-B5E5-A64CC4A5B7F4}.Debug|x64.Build.0 = Debug|x64
+		{EC1507BD-B283-4C80-8820-FA0C24F442E6}.Debug|x64.ActiveCfg = Debug|x64
+		{EC1507BD-B283-4C80-8820-FA0C24F442E6}.Debug|x64.Build.0 = Debug|x64
+		{F3812E88-EE01-4E5C-A332-578293B06990}.Debug|x64.ActiveCfg = Debug|x64
+		{F3812E88-EE01-4E5C-A332-578293B06990}.Debug|x64.Build.0 = Debug|x64
+		{F5C6AF4C-9810-4237-957F-27FD7106D462}.Debug|x64.ActiveCfg = Debug|x64
+		{F5C6AF4C-9810-4237-957F-27FD7106D462}.Debug|x64.Build.0 = Debug|x64
+		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.ActiveCfg = Debug|x64
+		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670}.Debug|x64.Build.0 = Debug|x64
+		{4957333D-0753-445B-81F3-97FA80D4CC53}.Debug|x64.ActiveCfg = Debug|x64
+		{4957333D-0753-445B-81F3-97FA80D4CC53}.Debug|x64.Build.0 = Debug|x64
+		{13E7E832-E6B2-4556-BDD1-B7C8CEB40608}.Debug|x64.ActiveCfg = Debug|x64
+		{13E7E832-E6B2-4556-BDD1-B7C8CEB40608}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{87D08FBD-DA30-40B9-8954-58ABA30DD5A4} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
-		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
 		{409BD3C2-2768-4C04-8EAE-7155EF23E89D} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
 		{F2CDB4FC-4B40-44FC-A9A4-8BF0D5D80F0B} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
 		{02DA12D7-07F7-43C4-8C60-57571FAEDB38} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
@@ -103,6 +135,15 @@ Global
 		{2B12F3C3-CA79-4E4F-9C8C-5F5F5D30AAFB} = {0BC04E89-AC66-45AC-ADC0-D7428BBBCBCA}
 		{4F533301-819D-4A33-BBCB-0CEFFC240298} = {0BC04E89-AC66-45AC-ADC0-D7428BBBCBCA}
 		{78EE8F1A-2901-47E4-A70A-CE25BE99B9E3} = {0BC04E89-AC66-45AC-ADC0-D7428BBBCBCA}
+		{AA89323E-3E9B-4E29-B5E5-A64CC4A5B7F4} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
+		{EC1507BD-B283-4C80-8820-FA0C24F442E6} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
+		{F3812E88-EE01-4E5C-A332-578293B06990} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
+		{F5C6AF4C-9810-4237-957F-27FD7106D462} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
+		{C874236D-564F-4123-8FB6-A309CC91142C} = {66221F07-B362-4F33-A834-1B20BCB8220A}
+		{6A62912A-8BE0-40AA-BC9F-E533DD1A1670} = {0BC04E89-AC66-45AC-ADC0-D7428BBBCBCA}
+		{4957333D-0753-445B-81F3-97FA80D4CC53} = {0BC04E89-AC66-45AC-ADC0-D7428BBBCBCA}
+		{83D2CD85-5F0B-47C6-93C5-A797343B3D27} = {66221F07-B362-4F33-A834-1B20BCB8220A}
+		{13E7E832-E6B2-4556-BDD1-B7C8CEB40608} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E54E090-023C-4AEB-A0DD-5C82D6A32B48}

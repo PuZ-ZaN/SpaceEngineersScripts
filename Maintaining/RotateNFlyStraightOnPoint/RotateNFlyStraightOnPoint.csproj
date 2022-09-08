@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4957333D-0753-445B-81F3-97FA80D4CC53}</ProjectGuid>
+    <ProjectGuid>{F5C6AF4C-9810-4237-957F-27FD7106D462}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>IngameScript</RootNamespace>
-    <AssemblyName>RayCastTestScript</AssemblyName>
+    <AssemblyName>RotateNFlyStraightOnPoint</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,6 +50,8 @@
     <AdditionalFiles Include="thumb.png" />
     <AdditionalFiles Include="MDK\whitelist.cache" />
   </ItemGroup>
+  <Import Project="D:\Developer\Projects\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\VectorsCasting\VectorsCasting.projitems" Label="Shared" />
+  <Import Project="..\..\Common\Gyros\Gyros.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <Copy SourceFiles="MDK\MDK.options.props" DestinationFolder="$(TargetDir)\MDK" />
