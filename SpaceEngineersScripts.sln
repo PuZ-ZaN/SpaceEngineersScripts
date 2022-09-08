@@ -55,11 +55,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetBaseBomber", "C:\User
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RaycastVision", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\RaycastVision\RaycastVision.shproj", "{83D2CD85-5F0B-47C6-93C5-A797343B3D27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docking", "Docking\Docking.csproj", "{13E7E832-E6B2-4556-BDD1-B7C8CEB40608}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docking", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Maintaining\Docking\Docking.csproj", "{13E7E832-E6B2-4556-BDD1-B7C8CEB40608}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Common\VectorsCasting\VectorsCasting.projitems*{13e7e832-e6b2-4556-bdd1-b7c8ceb40608}*SharedItemsImports = 4
+		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\VectorsCasting\VectorsCasting.projitems*{13e7e832-e6b2-4556-bdd1-b7c8ceb40608}*SharedItemsImports = 4
 		Common\VectorsCasting\VectorsCasting.projitems*{17e713b1-4a49-4eed-88dd-9d446c67193e}*SharedItemsImports = 4
 		Common\VectorsCasting\VectorsCasting.projitems*{5fc42a61-3af9-495d-be18-6948e47a57c8}*SharedItemsImports = 4
 		Common\VectorsCasting\VectorsCasting.projitems*{61eba249-19f3-48b6-a25b-a4cee90168ba}*SharedItemsImports = 13
