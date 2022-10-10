@@ -57,6 +57,14 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RaycastVision", "C:\Users\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docking", "C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Maintaining\Docking\Docking.csproj", "{13E7E832-E6B2-4556-BDD1-B7C8CEB40608}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemoteOpenGates", "RemoteOpenGates", "{948D9524-67C2-4186-9409-67698744C3FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyGrid", "SpyGrid\SpyGrid.csproj", "{E419ED75-811F-423B-BB8A-1F25FA887DBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteOpenGatesShip", "Maintaining\RemoteOpenGates\RemoteOpenGatesShip\RemoteOpenGatesShip.csproj", "{48F30ABD-9505-4564-9CD6-C75E90BEDF27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteOpenGatesStation", "Maintaining\RemoteOpenGates\RemoteOpenGatesStation\RemoteOpenGatesStation.csproj", "{092814AD-4A39-4476-8DBA-4423CA454F76}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\VectorsCasting\VectorsCasting.projitems*{13e7e832-e6b2-4556-bdd1-b7c8ceb40608}*SharedItemsImports = 4
@@ -66,6 +74,7 @@ Global
 		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\RaycastVision\RaycastVision.projitems*{83d2cd85-5f0b-47c6-93c5-a797343b3d27}*SharedItemsImports = 13
 		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\Gyros\Gyros.projitems*{c874236d-564f-4123-8fb6-a309cc91142c}*SharedItemsImports = 13
 		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\VectorsCasting\VectorsCasting.projitems*{d33dae02-0010-48df-874d-ee41d91ba35a}*SharedItemsImports = 4
+		Common\VectorsCasting\VectorsCasting.projitems*{e419ed75-811f-423b-bb8a-1f25fa887dbf}*SharedItemsImports = 4
 		C:\Users\NSFW\source\repos\SpaceEngineersScripts\SpaceEngineersScripts\Common\Gyros\Gyros.projitems*{f5c6af4c-9810-4237-957f-27fd7106d462}*SharedItemsImports = 4
 		Common\VectorsCasting\VectorsCasting.projitems*{f5c6af4c-9810-4237-957f-27fd7106d462}*SharedItemsImports = 4
 	EndGlobalSection
@@ -115,6 +124,12 @@ Global
 		{4957333D-0753-445B-81F3-97FA80D4CC53}.Debug|x64.Build.0 = Debug|x64
 		{13E7E832-E6B2-4556-BDD1-B7C8CEB40608}.Debug|x64.ActiveCfg = Debug|x64
 		{13E7E832-E6B2-4556-BDD1-B7C8CEB40608}.Debug|x64.Build.0 = Debug|x64
+		{E419ED75-811F-423B-BB8A-1F25FA887DBF}.Debug|x64.ActiveCfg = Debug|x64
+		{E419ED75-811F-423B-BB8A-1F25FA887DBF}.Debug|x64.Build.0 = Debug|x64
+		{48F30ABD-9505-4564-9CD6-C75E90BEDF27}.Debug|x64.ActiveCfg = Debug|x64
+		{48F30ABD-9505-4564-9CD6-C75E90BEDF27}.Debug|x64.Build.0 = Debug|x64
+		{092814AD-4A39-4476-8DBA-4423CA454F76}.Debug|x64.ActiveCfg = Debug|x64
+		{092814AD-4A39-4476-8DBA-4423CA454F76}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +159,10 @@ Global
 		{4957333D-0753-445B-81F3-97FA80D4CC53} = {0BC04E89-AC66-45AC-ADC0-D7428BBBCBCA}
 		{83D2CD85-5F0B-47C6-93C5-A797343B3D27} = {66221F07-B362-4F33-A834-1B20BCB8220A}
 		{13E7E832-E6B2-4556-BDD1-B7C8CEB40608} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
+		{948D9524-67C2-4186-9409-67698744C3FD} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
+		{E419ED75-811F-423B-BB8A-1F25FA887DBF} = {BAF25C0C-EF32-4144-863E-2B5E901BB9BC}
+		{48F30ABD-9505-4564-9CD6-C75E90BEDF27} = {948D9524-67C2-4186-9409-67698744C3FD}
+		{092814AD-4A39-4476-8DBA-4423CA454F76} = {948D9524-67C2-4186-9409-67698744C3FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E54E090-023C-4AEB-A0DD-5C82D6A32B48}

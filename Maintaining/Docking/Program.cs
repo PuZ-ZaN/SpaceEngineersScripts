@@ -51,7 +51,6 @@ namespace IngameScript
             Vector3D StationConnectorWorldPos = StationConnector.GetPosition();
             Vector3D StationConnectorGridPos = StationConnector.Position;
 
-
             textPanel.WriteText($"ShipConnectorWorldPos = {ShipConnectorWorldPos}\n", true);
             textPanel.WriteText($"ShipConnectorGridPos = {ShipConnectorGridPos}\n", true);
             textPanel.WriteText($"StationConnectorWorldPos = {StationConnectorWorldPos}\n", true);
